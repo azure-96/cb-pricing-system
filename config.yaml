@@ -1,0 +1,63 @@
+# Global Project Paths
+mypath: "Root path of the project"                   # Root path of the project
+data_path: "${mypath}/data"                          # Directory for all data files
+bond_data: "${data_path}/ConvertibleBondsData"       # Directory for bond-related data
+stock_data: "${data_path}/Stock"                     # Directory for stock price data
+result_path: "${mypath}/results"                     # Directory for output and intermediate results
+
+# Intermediate or Processed Data
+pricing_data: "${result_path}/df_cb_pricing.pkl"     # Final merged DataFrame with CB pricing results
+error_output: "${result_path}/Error"                 # Folder for logging failed or error CB cases
+raw_result_dir: "${result_path}/pkl"                 # Directory to store raw per-bond result files
+
+# Output Results
+cb_pricing_output: "${mypath}/results/pkl"           # Directory to save pricing outputs
+cb_pricing_figures: "${mypath}/results/figures"      # Directory to save pricing plot images
+
+# File Paths (Raw inputs and reference files)
+files:
+  bond_yield: "${bond_data}/WIND_ConvertibleBondYield.csv"         # Raw bond yield data
+  bond_index: "${bond_data}/bonds_index.csv"                       # Mapping between bond and type/credit rating
+  cb_coupon: "${bond_data}/WIND_ConvertibleBondsCoupon.csv"        # CB coupon schedule
+  bond_rate_output: "${bond_data}/bond_rate.pkl"                   # Output pickle for corporate bond rates
+  bond_rate_cn_output: "${bond_data}/bond_rate_cn.pkl"             # Output pickle for Treasury bond rates
+  cb_terms_pickle: "${data_path}/ConvertibleBondsTerms.pkl"        # Output pickle for CB term dictionary
+  calendar_csv: "${data_path}/calendar.csv"                        # Trading calendar file
+  stock_price_csv: "${data_path}/Stock/UnderlyingStockPrice.csv"   # Historical stock prices
+  stock_clean_dir: "${data_path}/StockClean"                       # Cleaned stock data folder
+  duplicated_stock_file: "${data_path}/StockClean/stocks_2019_duplicated.csv"  # File tracking duplicated stock rows
+  duplicate_times: 8                                               # Times to handle stock duplication
+
+# Pricing Parameters
+pricing:
+  cb_pricing_start_date: !!int 20230101               # Start date for pricing (format: YYYYMMDD)
+  pricing_models: [ "bs", "ccb", "mc" ]               # Models to run: Black-Scholes, Callable CB, Monte Carlo
+  plot_result: false                                  # Whether to generate pricing plots
+  num_sample: 10000                                   # Number of simulations (for MC)
+  parallel_mode: "none"                               # Execution mode: "thread", "process", or "none"
+  max_workers: 8                                      # Number of threads or processes for parallel execution
+
+  # Calculation Parameters
+  float_lower_bound: !!float 1e-150                   # Numerical stability: minimum float
+  float_upper_bound: !!float 1e300                    # Numerical stability: maximum float
+  days_of_year: !!float 365.0                         # Number of days in a year for discounting
+  bs_max_iter: !!int 100                              # Max iterations for implied volatility convergence
+  bs_tolerance: !!float 1e-4                          # Tolerance for Black-Scholes inversion
+  mc_simulations: !!int 10000                         # Number of paths for Monte Carlo
+  trading_days_per_year: !!float 245.0                # Number of trading days in a year
+  calendar_csv: "${data_path}/calendar.csv"           # Calendar path used in MC simulation
+
+  # Monte Carlo Simulation Parameters
+  mc_sample: 10000                                    # Number of simulations per bond (duplicate of num_sample)
+
+  # Volatility Settings
+  vol_list: [ 20, 60, 250 ]                           # Time windows (in days) for historical volatility calculation
+
+  # Execution Settings
+  use_multithreading: true                            # Whether to use threading
+  max_threads: 8                                       # Max number of threads
+  plot_figure: True                                    # Whether to save figures
+
+  # Debug/Test Options
+  test_case_only: false                               # Only run on one bond for debugging
+  test_cb_code: "113011"                              # Code of the test bond
