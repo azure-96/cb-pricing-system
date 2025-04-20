@@ -1,4 +1,5 @@
-"""Merge and preprocess corporate and government bond yields with credit ratings and maturity periods.
+"""
+Merge and preprocess corporate and government bond yields with credit ratings and maturity periods.
 
 This script reads raw yield data and bond metadata from CSV files,
 matches company/government bonds with their credit rating and remaining period,

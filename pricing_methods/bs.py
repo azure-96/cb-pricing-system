@@ -1,4 +1,6 @@
-"""Black-Scholes Convertible Bond Pricing Module."""
+"""
+Black-Scholes Convertible Bond Pricing Module.
+"""
 
 import numpy as np
 from scipy.stats import norm

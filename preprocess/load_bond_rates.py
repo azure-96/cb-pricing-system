@@ -1,4 +1,3 @@
-# -*- coding: utf-8 -*-
 """
 Merge and preprocess corporate and government bond yields with credit ratings and maturity periods.
 """

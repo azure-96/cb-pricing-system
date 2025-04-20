@@ -1,4 +1,6 @@
-"""Main script for convertible bond pricing from preprocessing to pricing."""
+"""
+Main script for convertible bond pricing from preprocessing to pricing.
+"""
 
 import datetime as dt
 import pickle

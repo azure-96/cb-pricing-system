@@ -1,4 +1,5 @@
-"""Merge convertible bond data with underlying stock prices and bond rates.
+"""
+Merge convertible bond data with underlying stock prices and bond rates.
 
 This module prepares a unified DataFrame for each convertible bond,
 including its price, terms, interest rates, and stock prices.

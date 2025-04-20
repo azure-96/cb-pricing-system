@@ -1,4 +1,3 @@
-# -*- coding: utf-8 -*-
 """
 Monte Carlo Pricing Model for Convertible Bonds
 

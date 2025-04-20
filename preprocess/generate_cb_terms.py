@@ -1,5 +1,5 @@
-# -*- coding: utf-8 -*-
-"""Generate or load convertible bond coupon terms from raw data.
+"""
+Generate or load convertible bond coupon terms from raw data.
 
 This script builds a dictionary mapping each bond to its coupon schedule,
 including annual coupon rates, payment dates, and total term length.

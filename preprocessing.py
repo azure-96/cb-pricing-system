@@ -1,5 +1,6 @@
 """
 Main script for preprocessing all convertible bond data before pricing.
+
 This includes: bond rates, CB terms, volatility estimations, and final data merge.
 """
 from preprocess.cb_term_and_rate import get_bond_rate_data, load_cb_terms_dict

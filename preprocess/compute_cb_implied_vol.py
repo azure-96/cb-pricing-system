@@ -1,5 +1,5 @@
-# -*- coding: utf-8 -*-
-"""Compute implied volatility and bond price for convertible bonds.
+"""
+Compute implied volatility and bond price for convertible bonds.
 
 This module estimates the implied volatility of the embedded call option
 within a convertible bond by separating the bond component and using

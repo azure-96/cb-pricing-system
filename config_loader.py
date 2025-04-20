@@ -1,4 +1,6 @@
-"""Configuration loader with recursive variable substitution."""
+"""
+Configuration loader with recursive variable substitution.
+"""
 
 import os
 import yaml

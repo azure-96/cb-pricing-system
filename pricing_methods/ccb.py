@@ -1,4 +1,5 @@
-"""Callable Convertible Bond (CCB) Pricing Module.
+"""
+Callable Convertible Bond (CCB) Pricing Module.
 
 This module implements the pricing formula for callable convertible bonds
 based on soft call/put constraints.

@@ -1,5 +1,6 @@
 """
-Grouped Error Summary Analysis:
+Grouped Error Summary Analysis
+
 This script evaluates pricing bias from convertible bond models (e.g., CCB, BS),
 and visualizes factor grouping summaries over time.
 """

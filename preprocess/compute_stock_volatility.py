@@ -1,5 +1,6 @@
-# -*- coding: utf-8 -*-
-"""Calculate and cache historical volatility for underlying stocks using rolling windows."""
+"""
+Calculate and cache historical volatility for underlying stocks using rolling windows.
+"""
 
 import os
 import numpy as np
