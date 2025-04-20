@@ -3,11 +3,11 @@
 This repository provides a modular and extensible framework for pricing convertible bonds (CBs) using multiple models including Black-Scholes (BS), Callable Convertible Bond (CCB), and Monte Carlo (MC) simulation. It is designed to allow easy customization and integration with additional models or datasets.
 
 
-- **Black-Scholes (BS)**
-- **Callable Convertible Bond (CCB)**
-- **Monte Carlo Simulation (MC)**
+- Black-Scholes (BS)
+- Monte Carlo Simulation (MC)
+- Callable Convertible Bond (CCB)
 
-The project supports full **data preprocessing**, **pricing computation**, **parallel execution**, and **visualization** of pricing results.
+The project supports full data preprocessing, pricing computation, parallel execution, and visualization of pricing results.
 
 
 ## Pricing Pipeline
