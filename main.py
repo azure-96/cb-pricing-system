@@ -39,7 +39,7 @@ colname_delta = [f"delta{v}" for v in vol_list] + ["deltaImpliedvol"]
 price_col_names = colname_mc + colname_bs + colname_ccb + colname_impliedvol + colname_delta
 
 # ========================== Step 2: Preprocessing ==========================
-print("[Preprocessing] Starting preprocessing steps...")
+print("[Preprocessing] Starting preprocessing steps.")
 # merged_df = run_preprocessing()  # This runs your preprocessing steps
 print("[Preprocessing] Done.\n")
 
@@ -72,7 +72,7 @@ def pricing_wrapper(args):
 
 # ========================== Step 5: Execute Pricing ==========================
 if __name__ == "__main__":
-    print(f"[🚀 Pricing] Pricing {len(cb_terms)} convertible bonds...\n")
+    print(f"[Pricing] Pricing {len(cb_terms)} convertible bonds.\n")
 
     if parallel_mode == "thread":
         with tqdm(total=len(cb_terms)) as pbar:
