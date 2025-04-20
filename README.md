@@ -89,12 +89,17 @@ This runs preprocessing and then starts the pricing pipeline using the model set
 ## Project Structure
 
 ```
-├── main.py                    # Entry point for preprocessing and pricing
-├── config.yaml                # Centralized configuration file
-├── preprocess/                # All preprocessing scripts
-├── pricing_methods/           # Pricing model implementations (BS, CCB, MC)
-├── data/                      # Raw and processed data
-├── results/                   # Output results (PKL, figures)
+├── analysis/                # Modules for analyzing pricing outputs and errors
+├── preprocess/              # All preprocessing scripts
+├── pricing_methods/         # Pricing model implementations (BS, CCB, MC)
+├── data/                    # Raw and processed data
+├── results/                 # Output results (PKL, figures)
+├── LICENSE                  
+├── README.md                # Project overview and instructions
+├── config.yaml              # Centralized configuration file
+├── config_loader.py         # Utility for loading and resolving YAML configs
+├── preprocessing.py         # Main script to run preprocessing pipeline
+└── main.py                  # Main entry point to run CB pricing
 ```
 
 
