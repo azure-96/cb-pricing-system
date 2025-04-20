@@ -7,7 +7,7 @@ This repository provides a modular and extensible framework for pricing converti
 - Monte Carlo Simulation (MC)
 - Callable Convertible Bond (CCB)
 
-The project supports full data preprocessing, pricing computation, parallel execution, and visualization of pricing results.
+The system supports full data preprocessing, pricing computation, parallel execution, and visualization of pricing results.
 
 
 ## Pricing Pipeline
