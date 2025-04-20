@@ -76,6 +76,16 @@ Each convertible bond is represented by a `cb_code` and corresponding term struc
 | `RedeemTriggerProportion` | Put trigger % of conversion price |
 
 
+## Configuration (`config.yaml`)
+
+YAML configuration covers:
+
+- Global paths (input/output)
+- Pricing model selection (`bs`, `ccb`, `mc`)
+- Historical volatility windows
+- Monte Carlo settings
+- Parallel execution mode
+- Debugging test-case support
 
 ## Run Instructions
 
@@ -101,20 +111,6 @@ This runs preprocessing and then starts the pricing pipeline using the model set
 ├── preprocessing.py         # Main script to run preprocessing pipeline
 └── main.py                  # Main entry point to run CB pricing
 ```
-
-
-
-## Configuration (`config.yaml`)
-
-YAML configuration covers:
-
-- Global paths (input/output)
-- Pricing model selection (`bs`, `ccb`, `mc`)
-- Historical volatility windows
-- Monte Carlo settings
-- Parallel execution mode
-- Debugging test-case support
-
 
 
 ## Dependencies
