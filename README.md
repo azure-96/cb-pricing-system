@@ -9,8 +9,6 @@ This repository provides a modular and extensible framework for pricing converti
 
 The project supports full **data preprocessing**, **pricing computation**, **parallel execution**, and **visualization** of pricing results.
 
----
-
 
 ## Pricing Pipeline
 
@@ -24,7 +22,6 @@ Pricing Engine (BS, CCB, MC)
 Output Results (PKL, CSV, PNG)
 ```
 
----
 
 ### `cb_terms` Example (Full)
 
@@ -78,7 +75,7 @@ Each convertible bond is represented by a `cb_code` and corresponding term struc
 | `Resell` | Put clause: `[years_before_maturity, trigger_days, observation_window, trigger_price, resale_price]` |
 | `RedeemTriggerProportion` | Put trigger % of conversion price |
 
----
+
 
 ## Run Instructions
 
@@ -88,7 +85,7 @@ python main.py
 
 This runs preprocessing and then starts the pricing pipeline using the model settings in `config.yaml`.
 
----
+
 ## Project Structure
 
 ```
@@ -100,7 +97,7 @@ This runs preprocessing and then starts the pricing pipeline using the model set
 ├── results/                   # Output results (PKL, figures)
 ```
 
----
+
 
 ## Configuration (`config.yaml`)
 
@@ -113,7 +110,7 @@ YAML configuration covers:
 - Parallel execution mode
 - Debugging test-case support
 
----
+
 
 ## Dependencies
 
@@ -121,6 +118,6 @@ YAML configuration covers:
 - NumPy / Pandas / Matplotlib
 - SciPy / tqdm / PyYAML
 
----
+
 ## License
 MIT
