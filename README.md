@@ -112,13 +112,5 @@ This runs preprocessing and then starts the pricing pipeline using the model set
 └── main.py                  # Main entry point to run CB pricing
 ```
 
-
-## Dependencies
-
-- Python 3.8+
-- NumPy / Pandas / Matplotlib
-- SciPy / tqdm / PyYAML
-
-
 ## License
 MIT
