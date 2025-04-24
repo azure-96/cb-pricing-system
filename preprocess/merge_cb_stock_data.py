@@ -8,7 +8,7 @@ including its price, terms, interest rates, and stock prices.
 import os
 import pandas as pd
 import dateparser
-from config_loader import load_config
+from . import get_config
 
 
 def merge_cb_stock_data(BondRateDaily: pd.DataFrame, CBterms: dict) -> pd.DataFrame:
@@ -22,17 +22,17 @@ def merge_cb_stock_data(BondRateDaily: pd.DataFrame, CBterms: dict) -> pd.DataFr
     Returns:
         pd.DataFrame: Merged panel data, saved as `cb_with_stock_all.pkl`
     """
-    config = load_config()
-    data_path = config['data_path']
-    bond_data_path = config['bond_data']
-    stock_data_path = config['stock_data']
+    _config = get_config()
+    data_path = _config['data_path']
+    bond_data_path = _config['bond_data']
+    stock_data_path = _config['stock_data']
 
     output_file = os.path.join(data_path, 'cb_with_stock_all.pkl')
     if os.path.exists(output_file):
-        print("Loaded existing merged CB-stock data.")
+        print("[SUCCESS] Loaded existing merged CB-stock data.")
         return pd.read_pickle(output_file)
 
-    print("Generating merged CB-stock data from raw files...")
+    print("[INFO] Generating merged CB-stock data from raw files.")
 
     df_price = pd.read_csv(os.path.join(bond_data_path, 'WIND_ConvertibleBondsDailyQuote.csv'), encoding='utf-8')
     df_clause = pd.read_csv(os.path.join(bond_data_path, 'WIND_ConvertibleBondsAdditionalFields.csv'), encoding='utf-8')
@@ -68,17 +68,17 @@ def merge_cb_stock_data(BondRateDaily: pd.DataFrame, CBterms: dict) -> pd.DataFr
     df_cb = df_cb.sort_values(by=['TRADE_CODE', 'TRADE_DT']).reset_index(drop=True)
 
     df_cb.to_pickle(output_file)
-    print("Merged CB-stock data saved.")
+    print("[SUCCESS] Merged CB-stock data saved.")
     return df_cb
 
 
 if __name__ == '__main__':
-    from merge_bond_yields import merge_bond_yields
-    from generate_cb_terms import load_or_create_cb_terms
+    from . import merge_bond_yields
+    from . import load_or_create_cb_terms
 
     bond_rates = merge_bond_yields()
     cb_terms = load_or_create_cb_terms()
     df = merge_cb_stock_data(bond_rates, cb_terms)
 
-    print("Sample output:")
+    print("[EXAMPLE] Sample output:")
     print(df.head())

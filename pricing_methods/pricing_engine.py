@@ -3,9 +3,9 @@ import datetime as dt
 import numpy as np
 import pandas as pd
 from pathlib import Path
-from pricing_methods.mc import mc_cb
-from pricing_methods.bs import bs_cb
-from pricing_methods.ccb import ccb_cb
+from .mc import mc_cb
+from .bs import bs_cb
+from .ccb import ccb_cb
 import matplotlib.pyplot as plt
 
 

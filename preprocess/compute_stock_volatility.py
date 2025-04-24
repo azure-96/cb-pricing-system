@@ -6,7 +6,7 @@ import os
 import numpy as np
 import pandas as pd
 from tqdm import tqdm
-from config_loader import load_config
+from . import get_config
 
 
 def calculate_stock_volatility(time_windows: list) -> pd.DataFrame:
@@ -20,15 +20,15 @@ def calculate_stock_volatility(time_windows: list) -> pd.DataFrame:
         pd.DataFrame: Historical volatility dataframe with columns:
                       ['S_INFO_WINDCODE', 'TRADE_DT', 'hist_vol_{window1}', ...]
     """
-    config = load_config()
-    stock_data_path = config['stock_data']
+    _config = get_config()
+    stock_data_path = _config['stock_data']
     output_file = os.path.join(stock_data_path, 'StockHistoricalVolatility.pkl')
 
     # if os.path.exists(output_file):
-    #     print("Loaded existing stock historical volatility data.")
+    #     print("[SUCCESS] Loaded existing stock historical volatility data.")
     #     return pd.read_pickle(output_file)
 
-    print("Volatility file not found. Calculating from raw stock price data...")
+    print("[INFO] Volatility file not found. Calculating from raw stock price data.")
 
     df_price = pd.read_csv(os.path.join(stock_data_path, 'UnderlyingStockPrice.csv'), encoding='utf-8')
     result_df = pd.DataFrame()
@@ -46,7 +46,7 @@ def calculate_stock_volatility(time_windows: list) -> pd.DataFrame:
         result_df = pd.concat([result_df, group[selected_cols]], axis=0)
 
     result_df.to_pickle(output_file)
-    print("Stock volatility calculated and saved.")
+    print("[SUCCESS] Stock volatility calculated and saved.")
 
     return result_df
 
@@ -55,5 +55,5 @@ if __name__ == '__main__':
     # default_windows = [20, 40, 60, 80, 100, 120, 140, 160, 180, 200, 220, 250]
     default_windows = [20, 40, 60]
     df = calculate_stock_volatility(default_windows)
-    print("Sample output:")
+    print("[EXAMPLE] Sample output:")
     print(df.head())

@@ -11,7 +11,6 @@ import pandas as pd
 from tqdm import tqdm
 from config_loader import load_config
 
-
 def load_or_create_cb_terms() -> dict:
     """
     Load cached CB terms dict if exists; otherwise, parse and construct from CSV.
@@ -34,11 +33,11 @@ def load_or_create_cb_terms() -> dict:
     output_file = os.path.join(config['data_path'], 'ConvertibleBondsTerms.pkl')
 
     # if os.path.exists(output_file):
-    #     print("Loaded existing Convertible Bond terms dictionary.")
+    #     print("[SUCCESS] Loaded existing Convertible Bond terms dictionary.")
     #     with open(output_file, 'rb') as f:
     #         return pickle.load(f)
 
-    print("Terms file not found. Generating bond terms from raw CSV...")
+    print("[INFO] Terms file not found. Generating bond terms from raw CSV.")
 
     # Read raw coupon schedule data
     filepath = os.path.join(bond_data_path, 'WIND_ConvertibleBondsCoupon.csv')
@@ -69,11 +68,11 @@ def load_or_create_cb_terms() -> dict:
     with open(output_file, 'wb') as f:
         pickle.dump(CBterms, f, protocol=pickle.HIGHEST_PROTOCOL)
 
-    print("Convertible Bond terms dictionary generated and saved.")
+    print("[SUCCESS] Convertible Bond terms dictionary generated and saved.")
     return CBterms
 
 
 if __name__ == '__main__':
     cb_terms = load_or_create_cb_terms()
     example_key = list(cb_terms.keys())[0]
-    print(f"Example: {example_key} → {cb_terms[example_key]}")
+    print(f"[EXAMPLE] {example_key} → {cb_terms[example_key]}")

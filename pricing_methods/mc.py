@@ -9,14 +9,14 @@ import numpy as np
 import pandas as pd
 import datetime as dt
 from scipy import sparse
-from config_loader import load_config
+from . import get_config
 
-# load config
-config = load_config()
-mypath = config['mypath']
-calendar_path = config['pricing']['calendar_csv']
-trading_of_year = config['pricing']['trading_days_per_year']
-mc_simulations = config['pricing']['mc_simulations']
+# Load pricing parameters from config
+_config = get_config()
+mypath = _config['mypath']
+calendar_path = _config['pricing']['calendar_csv']
+trading_of_year = _config['pricing']['trading_days_per_year']
+mc_simulations = _config['pricing']['mc_simulations']
 
 # load trading calendar
 trading_date = pd.read_csv(calendar_path)

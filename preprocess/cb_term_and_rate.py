@@ -17,13 +17,15 @@ from tqdm import tqdm
 from scipy.stats import norm
 from scipy.optimize import brentq
 from pricing_methods.bs import bs_call
-from config_loader import load_config
+from . import get_config
 
 
 def get_bond_rate_data(read_from_file = True) -> pd.DataFrame:
     """Load or build corporate bond rates with rating and term."""
-    config = load_config()
-    files = config['files']
+    # Load pricing parameters from config
+    _config = get_config()
+
+    files = _config['files']
 
     output_path = Path(files['bond_rate_output'])
     if read_from_file and output_path.exists():
@@ -48,14 +50,16 @@ def get_bond_rate_data(read_from_file = True) -> pd.DataFrame:
     df_treasury = df_treasury[['TRADE_DT', 'WindID', 'Period', 'BOND_RATE']]
     df_treasury.to_pickle(files['bond_rate_cn_output'])
 
-    print("[✓] Bond rate data saved.")
+    print("[SUCCESS] Bond rate data saved.")
     return df_corp
 
 
 def load_cb_terms_dict(read_from_file = True) -> dict:
     """Load or build convertible bond coupon term dictionary."""
-    config = load_config()
-    files = config['files']
+    # Load pricing parameters from config
+    _config = get_config()
+
+    files = _config['files']
 
     output_path = Path(files['cb_terms_pickle'])
     if read_from_file and output_path.exists():
@@ -78,7 +82,7 @@ def load_cb_terms_dict(read_from_file = True) -> dict:
 
     with open(output_path, 'wb') as f:
         pickle.dump(cb_terms, f)
-    print("[✓] Convertible bond term dictionary saved.")
+    print("[SUCCESS] Convertible bond term dictionary saved.")
     return cb_terms
 
 
@@ -133,7 +137,7 @@ def scipy_implied_volatility(s: float, k: float, r: float, tau: float, market_pr
 
 
 if __name__ == "__main__":
-    print("Running CB term and bond rate preprocessing...")
+    print("[INFO] Running CB term and bond rate preprocessing.")
 
     bond_rate_df = get_bond_rate_data(read_from_file=False)
     print(f"[INFO] Loaded {len(bond_rate_df)} bond rate records.")

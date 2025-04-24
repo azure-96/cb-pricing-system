@@ -4,7 +4,7 @@ Merge and preprocess corporate and government bond yields with credit ratings an
 
 import os
 import pandas as pd
-from config_loader import load_config
+from . import get_config
 
 
 def load_bond_rate_table() -> pd.DataFrame:
@@ -15,16 +15,16 @@ def load_bond_rate_table() -> pd.DataFrame:
         pd.DataFrame: Merged corporate bond yield table with columns:
                       ['TRADE_DT', 'WindID', 'CREDITRATING', 'Period', 'BOND_RATE']
     """
-    config = load_config()
-    bond_data_path = config['bond_data']
+    _config = get_config()
+    bond_data_path = _config['bond_data']
     corp_output_file = os.path.join(bond_data_path, 'bond_rate.pkl')
     gov_output_file = os.path.join(bond_data_path, 'bond_rate_cn.pkl')
 
     if os.path.exists(corp_output_file):
-        print("Loaded existing corporate bond yield data.")
+        print("[SUCCESS] Loaded existing corporate bond yield data.")
         return pd.read_pickle(corp_output_file)
 
-    print("Preprocessed bond yield files not found. Generating from raw data...")
+    print("[INFO] Preprocessed bond yield files not found. Generating from raw data.")
 
     bond_yield = pd.read_csv(os.path.join(bond_data_path, 'WIND_ConvertibleBondYield.csv'), encoding='utf-8')
     all_bond_index = pd.read_csv(os.path.join(bond_data_path, 'bonds_index.csv'), encoding='utf-8')
@@ -44,11 +44,11 @@ def load_bond_rate_table() -> pd.DataFrame:
     bond_rate_cn = bond_rate_cn[['TRADE_DT', 'WindID', 'Period', 'BOND_RATE']]
     bond_rate_cn.to_pickle(gov_output_file)
 
-    print("Bond yield data generated and saved.")
+    print("[SUCCESS] Bond yield data generated and saved.")
     return bond_rate_daily
 
 
 if __name__ == '__main__':
     df = load_bond_rate_table()
-    print("Sample output:")
+    print("[EXAMPLE] Sample output:")
     print(df.head())

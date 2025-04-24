@@ -11,10 +11,10 @@ TODO:
 import numpy as np
 from scipy.stats import norm
 import datetime as dt
-from config_loader import load_config
+from . import get_config
 
-# Load constants from config
-_config = load_config()
+# Load pricing parameters from config
+_config = get_config()
 pricing_cfg = _config["pricing"]
 float_lower_bound = pricing_cfg["float_lower_bound"]
 float_upper_bound = pricing_cfg["float_upper_bound"]

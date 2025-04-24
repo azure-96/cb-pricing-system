@@ -11,8 +11,8 @@ import numpy as np
 import pandas as pd
 from tqdm import tqdm
 from datetime import datetime
-from config_loader import load_config
 from scipy.stats import norm
+from . import get_config
 from pricing_methods.bs import bs_call
 
 
@@ -26,16 +26,18 @@ def compute_cb_implied_vol(CBterms: dict) -> pd.DataFrame:
     Returns:
         pd.DataFrame: Contains ['TRADE_DT', 'TRADE_CODE', 'tau', 'BondPrice', 'ImpliedVolatility']
     """
-    config = load_config()
-    data_path = config['data_path']
+    # Load pricing parameters from config
+    _config = get_config()
+
+    data_path = _config['data_path']
     input_file = os.path.join(data_path, 'cb_with_stock_all.pkl')
     output_file = os.path.join(data_path, 'cb_implied_volatility.pkl')
 
     if os.path.exists(output_file):
-        print("Loaded existing implied volatility results.")
+        print("[INFO] Loaded existing implied volatility results.")
         return pd.read_pickle(output_file)
 
-    print("Calculating implied volatilities and bond prices...")
+    print("[INFO] Calculating implied volatilities and bond prices.")
 
     df = pd.read_pickle(input_file)
     df['tau'] = ((df['Maturity'] - pd.to_datetime(df['TRADE_DT'].astype(str), format='%Y%m%d')) / np.timedelta64(1, 'D') + 1) / 365.0
@@ -65,12 +67,12 @@ def compute_cb_implied_vol(CBterms: dict) -> pd.DataFrame:
             )
 
         except Exception as e:
-            print(f"Failed on row {i}: {e}")
+            print(f"[ERROR] Failed on row {i}: {e}")
             continue
 
     df_out = df[['TRADE_DT', 'TRADE_CODE', 'tau', 'BondPrice', 'ImpliedVolatility']].copy()
     df_out.to_pickle(output_file)
-    print("Implied volatility data saved.")
+    print("[SUCCESS] Implied volatility data successfully saved.")
     return df_out
 
 
@@ -127,5 +129,5 @@ if __name__ == '__main__':
 
     cb_terms = load_or_create_cb_terms()
     df_vol = compute_cb_implied_vol(cb_terms)
-    print("Sample output:")
+    print("[INFO] Sample output:")
     print(df_vol.head())
